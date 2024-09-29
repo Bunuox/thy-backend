@@ -7,23 +7,17 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class UserCreateRequest {
+public class UserLoginRequest {
 
     @NotNull
     @JsonProperty("username")
     private String username;
 
     @NotNull
-    @JsonProperty("mail")
-    private String mail;
-
-    @NotNull
     @JsonProperty("password")
     private String password;
-
 }

@@ -3,7 +3,6 @@ package com.todo.todo.model.enumaration;
 public enum NoteStatus {
 
     ON_GOING("G"),
-    ON_HOLD("H"),
     DONE("D");
 
 

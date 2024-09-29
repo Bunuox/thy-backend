@@ -5,6 +5,7 @@ import com.todo.todo.model.enumaration.NoteStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -19,14 +20,16 @@ public class Note {
 
     //Generate will be added
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "t_notes_seq")
+    @SequenceGenerator(name = "t_notes_seq", sequenceName = "T_NOTES_SEQ", allocationSize = 1)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "title")
-    private String title;
-
     @Column(name = "user_id")
     private long userId;
+
+    @Column(name = "title")
+    private String title;
 
     @Column(name = "desc")
     private String desc;
@@ -38,7 +41,7 @@ public class Note {
     private LocalDateTime updatedAt;
 
     @Column(name = "due_date")
-    private LocalDateTime dueDate;
+    private LocalDate dueDate;
 
     @Column(name = "status")
     @Convert(converter = NoteStatusConverter.class)
