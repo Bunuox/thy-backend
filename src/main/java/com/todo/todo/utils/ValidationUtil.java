@@ -48,16 +48,17 @@ public class ValidationUtil {
         if (noteUpdateRequest == null) {
             throw new ValidationException("Invalid noteUpdateRequest");
         }
-        if (noteUpdateRequest.getTitle().isEmpty()) {
-            throw new ValidationException("Invalid title");
-        }
+
         if(noteUpdateRequest.getUserId() <= 0) {
             throw new ValidationException("Invalid user ID");
         }
 
-        if(noteUpdateRequest.getTitle().length() > 250) {
-            throw new ValidationException("Invalid title");
+        if (noteUpdateRequest.getTitle() != null && !noteUpdateRequest.getTitle().isEmpty()) {
+            if (noteUpdateRequest.getTitle().length() > 250) {
+                throw new ValidationException("Invalid title");
+            }
         }
+
         if (noteUpdateRequest.getDueDate() != null && noteUpdateRequest.getDueDate().isBefore(LocalDate.now())) {
             throw new ValidationException("Due date cannot be in the past");
         }
