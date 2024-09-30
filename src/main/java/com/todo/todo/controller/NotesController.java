@@ -27,9 +27,12 @@ public class NotesController {
     }
 
     @GetMapping("/{userId}/{page}/{size}")
-    public ResponseEntity<GenericRestResponse<List<Note>>> getAllNotes(@Validated @PathVariable Long userId, @PathVariable int page, @PathVariable int size) {
+    public ResponseEntity<GenericRestResponse<List<Note>>> getAllNotes(
+            @Validated @PathVariable Long userId, @PathVariable int page, @PathVariable int size) {
+
         ValidationUtil.validateNoteGetParameters(userId, page, size);
-        GenericRestResponse<List<Note>> response = GenericRestResponse.generateResponse(noteService.getAllNotes(userId, page, size), ResponseCodes.SUCCESS);
+        GenericRestResponse<List<Note>> response = GenericRestResponse
+                .generateResponse(noteService.getAllNotes(userId, page, size), ResponseCodes.SUCCESS);
         return ResponseEntity.ok(response);
     }
 
@@ -38,7 +41,9 @@ public class NotesController {
         GenericRestResponse<Note> genericRestResponse;
         ValidationUtil.validateNotePostParameters(noteCreateRequest);
         Optional<Note> noteOptional = noteService.createNote(noteCreateRequest);
-        genericRestResponse = noteOptional.map(note -> GenericRestResponse.generateResponse(note, ResponseCodes.SUCCESS)).orElseGet(() -> GenericRestResponse.generateResponse(null, ResponseCodes.NOTE_COULD_NOT_CREATED));
+        genericRestResponse = noteOptional.map(note ->
+                GenericRestResponse.generateResponse(note, ResponseCodes.SUCCESS)).orElseGet(() ->
+                GenericRestResponse.generateResponse(null, ResponseCodes.NOTE_COULD_NOT_CREATED));
         return ResponseEntity.ok(genericRestResponse);
     }
 
@@ -47,7 +52,9 @@ public class NotesController {
         GenericRestResponse<Note> genericRestResponse;
         ValidationUtil.validateNoteUpdateParameters(noteUpdateRequest);
         Optional<Note> noteOptional = noteService.updateNote(noteUpdateRequest);
-        genericRestResponse = noteOptional.map(note -> GenericRestResponse.generateResponse(note, ResponseCodes.SUCCESS)).orElseGet(() -> GenericRestResponse.generateResponse(null, ResponseCodes.NOTE_COULD_NOT_UPDATED));
+        genericRestResponse = noteOptional.map(note ->
+                GenericRestResponse.generateResponse(note, ResponseCodes.SUCCESS))
+                .orElseGet(() -> GenericRestResponse.generateResponse(null, ResponseCodes.NOTE_COULD_NOT_UPDATED));
         return ResponseEntity.ok(genericRestResponse);
     }
 

@@ -52,13 +52,16 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<GenericRestResponse<Long>> register(@Validated @RequestBody UserCreateRequest userCreateRequest) {
         ValidationUtil.validateUserCreateParameters(userCreateRequest);
-        if(userService.getUserByUsername(userCreateRequest.getUsername()).isPresent() || userService.getUserByMail(userCreateRequest.getMail()).isPresent()) {
+        if(userService.getUserByUsername(userCreateRequest.getUsername()).isPresent()
+                || userService.getUserByMail(userCreateRequest.getMail()).isPresent()) {
             return ResponseEntity.badRequest().body(GenericRestResponse.generateErrorResponse("User Already exists"));
         }
         GenericRestResponse<Long> genericRestResponse;
         Optional<User> user = userService.createUser(userCreateRequest);
 
-        genericRestResponse = user.map(value -> GenericRestResponse.generateResponse(value.getId(), ResponseCodes.SUCCESS)).orElseGet(() -> GenericRestResponse.generateResponse(null, ResponseCodes.USER_COULD_NOT_CREATED));
+        genericRestResponse = user.map(value ->
+                GenericRestResponse.generateResponse(value.getId(), ResponseCodes.SUCCESS))
+                .orElseGet(() -> GenericRestResponse.generateResponse(null, ResponseCodes.USER_COULD_NOT_CREATED));
         return ResponseEntity.ok(genericRestResponse);
     }
 
@@ -67,7 +70,9 @@ public class UserController {
         ValidationUtil.validateUserUpdateParameters(userUpdateRequest);
         GenericRestResponse<Long> genericRestResponse;
         Optional<User> user = userService.updateUser(userUpdateRequest);
-        genericRestResponse = user.map(value -> GenericRestResponse.generateResponse(value.getId(), ResponseCodes.SUCCESS)).orElseGet(() -> GenericRestResponse.generateResponse(null, ResponseCodes.USER_COULD_NOT_UPDATED));
+        genericRestResponse = user.map(value ->
+                GenericRestResponse.generateResponse(value.getId(), ResponseCodes.SUCCESS))
+                .orElseGet(() -> GenericRestResponse.generateResponse(null, ResponseCodes.USER_COULD_NOT_UPDATED));
         return ResponseEntity.ok(genericRestResponse);
     }
 

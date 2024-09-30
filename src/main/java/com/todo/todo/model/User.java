@@ -3,7 +3,6 @@ package com.todo.todo.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import javax.crypto.interfaces.PBEKey;
 
 @Entity
 @Table(name = "TBL_USER")

@@ -7,7 +7,6 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Table(name = "TBL_NOTE")
@@ -18,7 +17,6 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Note {
 
-    //Generate will be added
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "t_notes_seq")
     @SequenceGenerator(name = "t_notes_seq", sequenceName = "T_NOTES_SEQ", allocationSize = 1)
