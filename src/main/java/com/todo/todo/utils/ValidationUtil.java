@@ -8,8 +8,11 @@ import com.todo.todo.model.payload.request.user.UserLoginRequest;
 import com.todo.todo.model.payload.request.user.UserUpdateRequest;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class ValidationUtil {
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     private ValidationUtil() {
         throw new IllegalStateException("Utility class");
@@ -41,6 +44,17 @@ public class ValidationUtil {
         }
         if(noteCreateRequest.getUserId() == null || noteCreateRequest.getUserId() <= 0) {
             throw new ValidationException("Invalid user ID");
+        }
+        if(noteCreateRequest.getDueDate() != null && noteCreateRequest.getDueDate().isBefore(LocalDate.now())) {
+            throw new ValidationException("Due date cannot be in the past");
+        }
+        if(noteCreateRequest.getDueDate() != null ) {
+            if(!isValidDate(String.valueOf(noteCreateRequest.getDueDate()))) {
+                throw new ValidationException("Invalid format of Due Date");
+            }
+            if(noteCreateRequest.getDueDate().isBefore(LocalDate.now())) {
+                throw new ValidationException("Due date cannot be in the past");
+            }
         }
     }
 
@@ -127,5 +141,14 @@ public class ValidationUtil {
     private static boolean isValidEmail(String email) {
         String emailRegex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
         return email.matches(emailRegex);
+    }
+
+    private static boolean isValidDate(String dateStr) {
+        try {
+            LocalDate date = LocalDate.parse(dateStr, formatter);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 }
