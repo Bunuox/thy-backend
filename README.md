@@ -15,6 +15,6 @@ Projeyi çalıştırmadan önce aşağıdaki araçların bilgisayarınızda kuru
 1. Projeyi klonlayın veya zip olarak indirin:
    ```bash
    git clone https://github.com/Bunuox/thy-backend.git
-   cd proje-adi
+   cd todo
 2. mvn clean install
 3. mvn spring-boot:run
