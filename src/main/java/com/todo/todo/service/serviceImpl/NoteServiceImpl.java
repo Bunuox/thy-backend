@@ -85,9 +85,15 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
-    public List<Note> getAllNotes(Long userId, int page, int size) {
+    public List<Note> getAllNotes(String keyword, int page, int size, Long userId, NoteStatus status) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"));
-        return noteRepository.findByUserId(userId, pageable).getContent();
+
+        if(status == null) {
+            return noteRepository.findByTitleContainingOrDescContainingAndUserId(keyword, keyword, userId, pageable)
+                    .getContent();
+        }
+        return noteRepository.findByTitleOrDescAndUserIdAndStatus(
+                keyword, keyword, userId, status, pageable).getContent();
     }
 
     boolean checkUserId(Note note, Long userId) {

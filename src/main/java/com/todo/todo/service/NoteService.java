@@ -1,6 +1,7 @@
 package com.todo.todo.service;
 
 import com.todo.todo.model.Note;
+import com.todo.todo.model.enumaration.NoteStatus;
 import com.todo.todo.model.payload.request.note.NoteCreateRequest;
 import com.todo.todo.model.payload.request.note.NoteUpdateRequest;
 import org.springframework.stereotype.Service;
@@ -16,5 +17,5 @@ public interface NoteService {
 
     Long deleteNote(Long userId, Long noteId);
 
-    List<Note> getAllNotes(Long userId, int page, int size);
+    List<Note> getAllNotes(String keyword, int page, int size, Long userId, NoteStatus status);
 }

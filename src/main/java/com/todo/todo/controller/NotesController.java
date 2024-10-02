@@ -2,6 +2,7 @@ package com.todo.todo.controller;
 
 import com.todo.todo.exception.ValidationException;
 import com.todo.todo.model.Note;
+import com.todo.todo.model.enumaration.NoteStatus;
 import com.todo.todo.model.enumaration.ResponseCodes;
 import com.todo.todo.model.payload.request.note.NoteCreateRequest;
 import com.todo.todo.model.payload.request.note.NoteUpdateRequest;
@@ -28,11 +29,17 @@ public class NotesController {
 
     @GetMapping("/{userId}/{page}/{size}")
     public ResponseEntity<GenericRestResponse<List<Note>>> getAllNotes(
-            @Validated @PathVariable Long userId, @PathVariable int page, @PathVariable int size) {
+            @Validated @PathVariable
+            Long userId,
+            @PathVariable int page,
+            @PathVariable int size,
+            @RequestParam String keyword,
+            @RequestParam (required = false) NoteStatus status
+            ) {
 
         ValidationUtil.validateNoteGetParameters(userId, page, size);
         GenericRestResponse<List<Note>> response = GenericRestResponse
-                .generateResponse(noteService.getAllNotes(userId, page, size), ResponseCodes.SUCCESS);
+                .generateResponse(noteService.getAllNotes(keyword, page, size, userId, status), ResponseCodes.SUCCESS);
         return ResponseEntity.ok(response);
     }
 
