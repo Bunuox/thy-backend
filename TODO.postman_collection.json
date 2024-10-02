@@ -106,7 +106,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"title\":\"Title2\",\n    \"userId\":1,\n    \"desc\": \"desc\",\n    \"dueDate\":\"2024-10-05\"\n}",
+					"raw": "{\n    \"title\":\"ewew1r\",\n    \"userId\":1,\n    \"desc\": \"desvdwqc1\",\n    \"dueDate\":\"2024-10-05\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -142,7 +142,7 @@
 					}
 				],
 				"url": {
-					"raw": "localhost:8080/api/note/1/0/3",
+					"raw": "localhost:8080/api/note/1/0/5?keyword=&status=",
 					"host": [
 						"localhost"
 					],
@@ -152,13 +152,16 @@
 						"note",
 						"1",
 						"0",
-						"3"
+						"5"
 					],
 					"query": [
 						{
-							"key": "",
-							"value": null,
-							"disabled": true
+							"key": "keyword",
+							"value": ""
+						},
+						{
+							"key": "status",
+							"value": ""
 						}
 					]
 				}
@@ -221,7 +224,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcyNzc2ODQyMSwiZXhwIjoxNzI3ODU0ODIxfQ._teFlkOX-26F5KnwatwvcRC2eWM-Aso9VpgxDSWKcQo",
+				"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcyNzg5NjE1NSwiZXhwIjoxNzI3OTgyNTU1fQ.oswz1Dq7dqvrX_uDAxeg-7FsmqKSBSX1fI91nAqBQTQ\"",
 				"type": "string"
 			}
 		]
